@@ -1,7 +1,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-
+///////tytgygyug
 void init(void)
 {
     /* selecciona el color de borrado */
