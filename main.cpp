@@ -1,13 +1,26 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-
 void init(void)
 {
     /* selecciona el color de borrado */
     glClearColor (0.0, 0.0, 0.0, 0.0);
     glShadeModel (GL_FLAT);
 }
+
+//void reshape(int w, int h)
+//{
+    /* definemos el marco */
+  //  glViewport(0, 0, w, h);
+    /* cambiamos a la matriz de proyección */
+    //glMatrixMode(GL_PROJECTION);
+    /* definimos una proyección perspectiva con
+    un fovy de 60 grados y el near a 1.0 y el
+    far a 20.0 */
+   // glLoadIdentity();
+    //gluPerspective(20.0, GLfloat(w) / GLfloat(h), 1.0, 20.0);
+//}*/
+
 void display(void)
 {
     /* borra la pantalla */
@@ -16,26 +29,16 @@ void display(void)
     glMatrixMode(GL_MODELVIEW);
     /* color */
     glColor3f(1.0, 1.0, 1.0);
-    /* transformación modelo/vista */
-    glLoadIdentity();
-    glTranslatef(0.0, 0.0, -5.0);
+   /* transformación modelo/vista */
+    gluLookAt(0.0,0.0,0.0, //punto de vista en el eje X,Y,Z
+              1.0,1.0,1.0, //Centro del Objeto en el eje X,Y,Z
+              0.0,1.0,0.0); //Orientación de la cámara (vector UP el eje X,Y,Z)
     /* Dibujamos una tetera */
-    glutWireTeapot(1.0);
+    glutWireTeapot(0.8);
     /* Vacia el buffer de dibujo */
     glFlush ();
 }
-void reshape(int w, int h)
-{
-    /* definemos el marco */
-    glViewport(0, 0, w, h);
-    /* cambiamos a la matriz de proyección */
-    glMatrixMode(GL_PROJECTION);
-    /* definimos una proyección perspectiva con
-    un fovy de 60 grados y el near a 1.0 y el
-    far a 20.0 */
-    glLoadIdentity();
-    gluPerspective(60.0, GLfloat(w) / GLfloat(h), 1.0, 20.0);
-}
+
 int main(int argc, char** argv)
 {
 // Inicializa la librería auxiliar GLUT
@@ -53,9 +56,7 @@ int main(int argc, char** argv)
 // Indica cual es la función de dibujo
     glutDisplayFunc(display);
 // Indica cual es la función para el cambio de tamaño de laventana
-    glutReshapeFunc(reshape);
+    //glutReshapeFunc(reshape);
 // Comienza el bucle de dibujo y proceso de eventos.
     glutMainLoop();
 }
-
-   
